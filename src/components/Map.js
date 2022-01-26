@@ -1,6 +1,7 @@
-import * as React from 'react';
-import { useState } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import React, { useState, useEffect } from 'react';
+import MapGL, { Marker, Popup, WebMercatorViewport } from 'react-map-gl';
+import linestring from 'turf-linestring';
+import bbox from '@turf/bbox';
 
 const DUMMY_DATA = [
   {
@@ -21,8 +22,8 @@ const DUMMY_DATA = [
 
 const Map = () => {
   const [viewport, setViewport] = useState({
-    width: '100vw',
-    height: '100vh',
+    width: window.innerWidth,
+    height: window.innerHeight,
     latitude: 37.7577,
     longitude: -122.4376,
     zoom: 8,
@@ -33,8 +34,33 @@ const Map = () => {
     setSelectedMarker(location);
   };
 
+  useEffect(() => {
+    const coordinates = DUMMY_DATA.map(location => [location.longitude, location.latitude]);
+    const line = linestring(coordinates);
+    const [minLng, minLat, maxLng, maxLat] = bbox(line);
+
+    const vp = new WebMercatorViewport(viewport);
+
+    const { longitude, latitude, zoom } = vp.fitBounds(
+      [
+        [minLng, minLat],
+        [maxLng, maxLat],
+      ],
+      {
+        padding: 40,
+      }
+    );
+
+    setViewport({
+      ...viewport,
+      longitude,
+      latitude,
+      zoom,
+    });
+  }, []);
+
   return (
-    <ReactMapGL
+    <MapGL
       {...viewport}
       mapStyle='mapbox://styles/mapbox/satellite-streets-v11'
       onViewportChange={nextViewport => setViewport(nextViewport)}
@@ -61,7 +87,7 @@ const Map = () => {
           <p>{selectedMarker.description}</p>
         </Popup>
       )}
-    </ReactMapGL>
+    </MapGL>
   );
 };
 
