@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import MapGL, { Marker, Popup, LinearInterpolator, WebMercatorViewport } from 'react-map-gl';
+import { useState, useEffect } from 'react';
+import MapGL, {
+  Marker,
+  Popup,
+  LinearInterpolator,
+  WebMercatorViewport,
+  FlyToInterpolator,
+} from 'react-map-gl';
 import linestring from 'turf-linestring';
 import bbox from '@turf/bbox';
 import { Fragment } from 'react/cjs/react.production.min';
 
-const DUMMY_DATA = [
+export const DUMMY_DATA = [
   {
+    id: 1,
     latitude: 37.7577,
     longitude: -122.4376,
     name: 'San Francisco',
@@ -13,6 +20,7 @@ const DUMMY_DATA = [
     icon: '🖕',
   },
   {
+    id: 2,
     latitude: 0,
     longitude: 0,
     name: 'Middle of the sea',
@@ -21,7 +29,7 @@ const DUMMY_DATA = [
   },
 ];
 
-const Map = () => {
+const Map = props => {
   const [viewport, setViewport] = useState({
     width: window.innerWidth,
     height: window.innerHeight - 150,
@@ -29,13 +37,13 @@ const Map = () => {
     longitude: -122.4376,
     zoom: 8,
   });
-  const [selectedMarker, setSelectedMarker] = useState(null);
 
   const markerClickHandler = location => {
-    setSelectedMarker(location);
+    props.setSelectedMarker(location);
   };
 
   const centreMap = () => {
+    props.setSelectedMarker(null);
     const coordinates = DUMMY_DATA.map(location => [location.longitude, location.latitude]);
     const line = linestring(coordinates);
     const [minLng, minLat, maxLng, maxLat] = bbox(line);
@@ -62,6 +70,18 @@ const Map = () => {
     });
   };
 
+  const flyToLocation = location => {
+    setViewport({
+      ...viewport,
+      longitude: -74.1,
+      latitude: 40.7,
+      zoom: 14,
+      transitionDuration: 5000,
+      transitionInterpolator: new FlyToInterpolator(),
+      // transitionEasing: d3.easeCubic,
+    });
+  };
+
   useEffect(() => {
     centreMap();
   }, []);
@@ -76,7 +96,7 @@ const Map = () => {
       >
         {DUMMY_DATA.map(location => (
           <Marker
-            key={location.latitude}
+            key={location.id}
             latitude={location.latitude}
             longitude={location.longitude}
             onClick={() => markerClickHandler(location)}
@@ -85,18 +105,19 @@ const Map = () => {
           </Marker>
         ))}
 
-        {selectedMarker && (
+        {props.selectedMarker && (
           <Popup
-            latitude={selectedMarker.latitude}
-            longitude={selectedMarker.longitude}
-            onClose={() => setSelectedMarker(null)}
+            latitude={props.selectedMarker.latitude}
+            longitude={props.selectedMarker.longitude}
+            onClose={() => props.setSelectedMarker(null)}
           >
-            <h2>{selectedMarker.name}</h2>
-            <p>{selectedMarker.description}</p>
+            <h2>{props.selectedMarker.name}</h2>
+            <p>{props.selectedMarker.description}</p>
           </Popup>
         )}
       </MapGL>
       <button onClick={centreMap}>Centre map</button>
+      <button onClick={() => flyToLocation('')}>Fly to NYC</button>
     </Fragment>
   );
 };
