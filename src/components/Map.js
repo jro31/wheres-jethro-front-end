@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import MapGL, { Marker, Popup, FlyToInterpolator } from 'react-map-gl';
+import MapGL, { Marker, Popup } from 'react-map-gl';
 import { Fragment } from 'react/cjs/react.production.min';
 import useCentreMap from '../hooks/use-centre-map';
 
@@ -8,18 +8,6 @@ const Map = props => {
     props.setSelectedMarker(location);
   };
   const centreMap = useCentreMap();
-
-  const flyToLocation = location => {
-    props.setViewport({
-      ...props.viewport,
-      longitude: -74.1,
-      latitude: 40.7,
-      zoom: 14,
-      transitionDuration: 5000,
-      transitionInterpolator: new FlyToInterpolator(),
-    });
-  };
-
   useEffect(() => {
     centreMap(props.checkInLocations, props.setSelectedMarker, props.viewport, props.setViewport);
   }, []);
@@ -54,8 +42,6 @@ const Map = props => {
           </Popup>
         )}
       </MapGL>
-      {/* <button onClick={centreMap}>Centre map</button> */}
-      {/* <button onClick={() => flyToLocation('')}>Fly to NYC</button> */}
     </Fragment>
   );
 };

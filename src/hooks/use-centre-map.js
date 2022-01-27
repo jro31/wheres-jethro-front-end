@@ -3,9 +3,9 @@ import linestring from 'turf-linestring';
 import bbox from '@turf/bbox';
 
 const useCentreMap = () => {
-  const centreMap = (checkInLocations, setSelectedMarker, viewport, setViewport) => {
+  const centreMap = (locations, setSelectedMarker, viewport, setViewport) => {
     setSelectedMarker(null);
-    const coordinates = checkInLocations.map(location => [location.longitude, location.latitude]);
+    const coordinates = locations.map(location => [location.longitude, location.latitude]);
     const line = linestring(coordinates);
     const [minLng, minLat, maxLng, maxLat] = bbox(line);
 

@@ -1,8 +1,12 @@
+import useFlyToLocation from '../hooks/use-fly-to-location';
 import styles from './CheckIns.module.css';
 
 const CheckIns = props => {
+  const flyToLocation = useFlyToLocation();
+
   const locationRowClickHandler = location => {
     props.setSelectedMarker(location);
+    flyToLocation(location, props.viewport, props.setViewport);
   };
 
   return (
