@@ -1,67 +1,48 @@
-import * as React from 'react';
-import { useState } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import { useEffect } from 'react';
+import MapGL, { Marker, Popup } from 'react-map-gl';
+import { Fragment } from 'react/cjs/react.production.min';
+import useCentreMap from '../hooks/use-centre-map';
 
-const DUMMY_DATA = [
-  {
-    latitude: 37.7577,
-    longitude: -122.4376,
-    name: 'San Francisco',
-    description: 'Bunch of smug fuckers',
-    icon: '🖕',
-  },
-  {
-    latitude: 0,
-    longitude: 0,
-    name: 'Middle of the sea',
-    description: 'Good for swimming',
-    icon: '🤿',
-  },
-];
-
-const Map = () => {
-  const [viewport, setViewport] = useState({
-    width: '100vw',
-    height: '100vh',
-    latitude: 37.7577,
-    longitude: -122.4376,
-    zoom: 8,
-  });
-  const [selectedMarker, setSelectedMarker] = useState(null);
-
+const Map = props => {
   const markerClickHandler = location => {
-    setSelectedMarker(location);
+    props.setSelectedMarker(location);
   };
+  const centreMap = useCentreMap();
+  useEffect(() => {
+    centreMap(props.checkInLocations, props.setSelectedMarker, props.viewport, props.setViewport);
+  }, []);
 
   return (
-    <ReactMapGL
-      {...viewport}
-      mapStyle='mapbox://styles/mapbox/satellite-streets-v11'
-      onViewportChange={nextViewport => setViewport(nextViewport)}
-      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-    >
-      {DUMMY_DATA.map(location => (
-        <Marker
-          key={location.latitude}
-          latitude={location.latitude}
-          longitude={location.longitude}
-          onClick={() => markerClickHandler(location)}
-        >
-          {location.icon}
-        </Marker>
-      ))}
+    <Fragment>
+      <MapGL
+        {...props.viewport}
+        mapStyle='mapbox://styles/mapbox/satellite-streets-v11'
+        onViewportChange={nextViewport => props.setViewport(nextViewport)}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+      >
+        {props.checkInLocations.map(location => (
+          <Marker
+            key={location.id}
+            latitude={location.latitude}
+            longitude={location.longitude}
+            onClick={() => markerClickHandler(location)}
+          >
+            {location.icon}
+          </Marker>
+        ))}
 
-      {selectedMarker && (
-        <Popup
-          latitude={selectedMarker.latitude}
-          longitude={selectedMarker.longitude}
-          onClose={() => setSelectedMarker(null)}
-        >
-          <h2>{selectedMarker.name}</h2>
-          <p>{selectedMarker.description}</p>
-        </Popup>
-      )}
-    </ReactMapGL>
+        {props.selectedMarker && (
+          <Popup
+            latitude={props.selectedMarker.latitude}
+            longitude={props.selectedMarker.longitude}
+            onClose={() => props.setSelectedMarker(null)}
+          >
+            <h2>{props.selectedMarker.name}</h2>
+            <p>{props.selectedMarker.description}</p>
+          </Popup>
+        )}
+      </MapGL>
+    </Fragment>
   );
 };
 

@@ -1,0 +1,10 @@
+.location-row {
+  display: flex;
+  padding: 1rem;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: gray;
+}
