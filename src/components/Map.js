@@ -1,100 +1,38 @@
-import { useState, useEffect } from 'react';
-import MapGL, {
-  Marker,
-  Popup,
-  LinearInterpolator,
-  WebMercatorViewport,
-  FlyToInterpolator,
-} from 'react-map-gl';
-import linestring from 'turf-linestring';
-import bbox from '@turf/bbox';
+import { useEffect } from 'react';
+import MapGL, { Marker, Popup, FlyToInterpolator } from 'react-map-gl';
 import { Fragment } from 'react/cjs/react.production.min';
-
-export const DUMMY_DATA = [
-  {
-    id: 1,
-    latitude: 37.7577,
-    longitude: -122.4376,
-    name: 'San Francisco',
-    description: 'Bunch of smug fuckers',
-    icon: '🖕',
-  },
-  {
-    id: 2,
-    latitude: 0,
-    longitude: 0,
-    name: 'Middle of the sea',
-    description: 'Good for swimming',
-    icon: '🤿',
-  },
-];
+import useCentreMap from '../hooks/use-centre-map';
 
 const Map = props => {
-  const [viewport, setViewport] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight - 150,
-    latitude: 37.7577,
-    longitude: -122.4376,
-    zoom: 8,
-  });
-
   const markerClickHandler = location => {
     props.setSelectedMarker(location);
   };
-
-  const centreMap = () => {
-    props.setSelectedMarker(null);
-    const coordinates = DUMMY_DATA.map(location => [location.longitude, location.latitude]);
-    const line = linestring(coordinates);
-    const [minLng, minLat, maxLng, maxLat] = bbox(line);
-
-    const vp = new WebMercatorViewport(viewport);
-
-    const { longitude, latitude, zoom } = vp.fitBounds(
-      [
-        [minLng, minLat],
-        [maxLng, maxLat],
-      ],
-      {
-        padding: 40,
-      }
-    );
-
-    setViewport({
-      ...viewport,
-      longitude,
-      latitude,
-      zoom,
-      transitionInterpolator: new LinearInterpolator(),
-      transitionDuration: 2000,
-    });
-  };
+  const centreMap = useCentreMap();
 
   const flyToLocation = location => {
-    setViewport({
-      ...viewport,
+    props.setViewport({
+      ...props.viewport,
       longitude: -74.1,
       latitude: 40.7,
       zoom: 14,
       transitionDuration: 5000,
       transitionInterpolator: new FlyToInterpolator(),
-      // transitionEasing: d3.easeCubic,
     });
   };
 
   useEffect(() => {
-    centreMap();
+    centreMap(props.checkInLocations, props.setSelectedMarker, props.viewport, props.setViewport);
   }, []);
 
   return (
     <Fragment>
       <MapGL
-        {...viewport}
+        {...props.viewport}
         mapStyle='mapbox://styles/mapbox/satellite-streets-v11'
-        onViewportChange={nextViewport => setViewport(nextViewport)}
+        onViewportChange={nextViewport => props.setViewport(nextViewport)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >
-        {DUMMY_DATA.map(location => (
+        {props.checkInLocations.map(location => (
           <Marker
             key={location.id}
             latitude={location.latitude}
@@ -116,8 +54,8 @@ const Map = props => {
           </Popup>
         )}
       </MapGL>
-      <button onClick={centreMap}>Centre map</button>
-      <button onClick={() => flyToLocation('')}>Fly to NYC</button>
+      {/* <button onClick={centreMap}>Centre map</button> */}
+      {/* <button onClick={() => flyToLocation('')}>Fly to NYC</button> */}
     </Fragment>
   );
 };

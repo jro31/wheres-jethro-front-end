@@ -1,5 +1,3 @@
-import { DUMMY_DATA } from './Map';
-
 import styles from './CheckIns.module.css';
 
 const CheckIns = props => {
@@ -9,7 +7,7 @@ const CheckIns = props => {
 
   return (
     <div>
-      {DUMMY_DATA.map(location => (
+      {props.checkInLocations.map(location => (
         <div
           key={location.id}
           onClick={() => locationRowClickHandler(location)}
