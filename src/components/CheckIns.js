@@ -15,7 +15,9 @@ const CheckIns = props => {
         <div
           key={location.id}
           onClick={() => locationRowClickHandler(location)}
-          className={styles['location-row']}
+          className={`${styles['location-row']} ${
+            props.selectedMarker && props.selectedMarker.id === location.id ? styles.selected : ''
+          }`}
         >
           <div>{location.name}</div>
           <div>{location.description}</div>
