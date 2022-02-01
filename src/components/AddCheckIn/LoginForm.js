@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from '../ui/Button';
 import styles from './LoginForm.module.css';
 
 const LoginForm = props => {
@@ -16,7 +17,7 @@ const LoginForm = props => {
   };
 
   const canSubmit = () => {
-    return /^\S+@\S+\.\S+$/.test(enteredEmail.trim()) && enteredPassword.trim().length;
+    return /^\S+@\S+\.\S+$/.test(enteredEmail.trim()) && enteredPassword.trim().length > 0;
   };
 
   const loginHandler = async event => {
@@ -76,9 +77,9 @@ const LoginForm = props => {
         </div>
         {/* TODO - Handle is submitting being true */}
         {/* TODO - Display error message */}
-        <button disabled={!canSubmit() || isSubmitting} form='login-form'>
+        <Button disabled={!canSubmit() || isSubmitting} form='login-form'>
           Login
-        </button>
+        </Button>
       </form>
     </div>
   );

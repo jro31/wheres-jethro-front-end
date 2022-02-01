@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '../ui/Button';
 
 import styles from './AddCheckInForm.module.css';
 
@@ -118,9 +119,9 @@ const AddCheckInForm = props => {
           <input type='text' id='icon' value={enteredIcon} onChange={iconChangeHandler} />
         </div>
         {/* TODO - Handle isSubmitting being true */}
-        <button disabled={canSubmit() && isSubmitting} form='check-in-form'>
+        <Button disabled={!canSubmit() || isSubmitting} form='check-in-form'>
           Submit
-        </button>
+        </Button>
       </form>
     </div>
   );

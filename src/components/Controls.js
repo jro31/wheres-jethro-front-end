@@ -1,11 +1,12 @@
 import useCentreMap from '../hooks/use-centre-map';
+import Button from './ui/Button';
 
 const Controls = props => {
   const centreMap = useCentreMap();
 
   return (
     <div>
-      <button
+      <Button
         onClick={() =>
           centreMap(
             props.checkInLocations,
@@ -16,7 +17,7 @@ const Controls = props => {
         }
       >
         Centre map
-      </button>
+      </Button>
     </div>
   );
 };

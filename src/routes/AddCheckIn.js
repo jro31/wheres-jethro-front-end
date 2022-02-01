@@ -5,6 +5,7 @@ import FullPageSpinner from '../components/AddCheckIn/FullPageSpinner';
 import LoginForm from '../components/AddCheckIn/LoginForm';
 import RetryGetCurrentLocation from '../components/AddCheckIn/RetryGetCurrentLocation';
 import useGetCurrentLocation from '../hooks/use-get-current-location';
+import Button from '../components/ui/Button';
 
 const AddCheckIn = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -68,12 +69,14 @@ const AddCheckIn = () => {
           {loggedIn && (
             <Fragment>
               {currentLocation.success && <AddCheckInForm currentLocation={currentLocation} />}
-              {currentLocation.success === false && <RetryGetCurrentLocation />}
+              {currentLocation.success === false && (
+                <RetryGetCurrentLocation setCurrentLocation={setCurrentLocation} />
+              )}
               {currentLocation.success === null && (
                 <FullPageSpinner text='Getting current location' />
               )}
               {/* TODO - Display logout error */}
-              <button onClick={logoutHandler}>Logout</button>
+              <Button onClick={logoutHandler}>Logout</Button>
             </Fragment>
           )}
           {!loggedIn && <LoginForm setLoggedIn={setLoggedIn} />}
