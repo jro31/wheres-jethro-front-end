@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from '../ui/Button';
-import styles from './LoginForm.module.css';
+import Form from '../ui/Form';
+import InputContainer from '../ui/InputContainer';
 
 const LoginForm = props => {
   const [enteredEmail, setEnteredEmail] = useState('');
@@ -53,35 +54,27 @@ const LoginForm = props => {
   };
 
   return (
-    <div className={styles['form-container']}>
-      <form id='login-form' className={styles.form} onSubmit={loginHandler}>
-        <div className={styles['input-container']}>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='text'
-            required
-            id='email'
-            value={enteredEmail}
-            onChange={emailChangeHandler}
-          />
-        </div>
-        <div className={styles['input-container']}>
-          <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            required
-            id='password'
-            value={enteredPassword}
-            onChange={passwordChangeHandler}
-          />
-        </div>
-        {/* TODO - Handle is submitting being true */}
-        {/* TODO - Display error message */}
-        <Button disabled={!canSubmit() || isSubmitting} form='login-form'>
-          Login
-        </Button>
-      </form>
-    </div>
+    <Form onSubmit={loginHandler} id='login-form'>
+      <InputContainer>
+        <label htmlFor='email'>Email</label>
+        <input type='text' required id='email' value={enteredEmail} onChange={emailChangeHandler} />
+      </InputContainer>
+      <InputContainer>
+        <label htmlFor='password'>Password</label>
+        <input
+          type='password'
+          required
+          id='password'
+          value={enteredPassword}
+          onChange={passwordChangeHandler}
+        />
+      </InputContainer>
+      {/* TODO - Handle is submitting being true */}
+      {/* TODO - Display error message */}
+      <Button disabled={!canSubmit() || isSubmitting} form='login-form'>
+        Login
+      </Button>
+    </Form>
   );
 };
 
