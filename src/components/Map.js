@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import MapGL, { Marker, Popup } from 'react-map-gl';
-import { Fragment } from 'react/cjs/react.production.min';
+
 import useCentreMap from '../hooks/use-centre-map';
+import styles from './Map.module.css';
 
 const Map = props => {
   const markerClickHandler = location => {
@@ -26,6 +27,7 @@ const Map = props => {
             latitude={location.latitude}
             longitude={location.longitude}
             onClick={() => markerClickHandler(location)}
+            className={styles.marker}
           >
             {location.icon}
           </Marker>

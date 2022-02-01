@@ -6,6 +6,7 @@ import styles from './AddCheckInForm.module.css';
 const AddCheckInForm = props => {
   const [enteredName, setEnteredName] = useState('');
   const [enteredDescription, setEnteredDescription] = useState('');
+  const [enteredIcon, setEnteredIcon] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -16,6 +17,10 @@ const AddCheckInForm = props => {
 
   const descriptionChangeHandler = event => {
     setEnteredDescription(event.target.value);
+  };
+
+  const iconChangeHandler = event => {
+    setEnteredIcon(event.target.value);
   };
 
   const addCheckInHandler = async event => {
@@ -33,6 +38,7 @@ const AddCheckInForm = props => {
           check_in: {
             name: enteredName.trim(),
             description: enteredDescription.trim(),
+            icon: enteredIcon.trim(),
             latitude: props.currentLocation.latitude,
             longitude: props.currentLocation.longitude,
             accuracy: props.currentLocation.accuracy,
@@ -106,6 +112,10 @@ const AddCheckInForm = props => {
             value={enteredDescription}
             onChange={descriptionChangeHandler}
           />
+        </div>
+        <div className={styles['input-container']}>
+          <label htmlFor='icon'>Icon</label>
+          <input type='text' id='icon' value={enteredIcon} onChange={iconChangeHandler} />
         </div>
         {/* TODO - Handle isSubmitting being true */}
         <button disabled={canSubmit() && isSubmitting} form='check-in-form'>
