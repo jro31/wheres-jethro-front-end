@@ -1,56 +1,59 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import CheckIns from './components/CheckIns';
 import Controls from './components/Controls';
 import Map from './components/Map';
 
-const DUMMY_DATA = [
-  {
-    id: 1,
-    latitude: 37.7577,
-    longitude: -122.4376,
-    name: 'San Francisco',
-    description: 'Bunch of smug fuckers',
-    icon: '🖕',
-  },
-  {
-    id: 2,
-    latitude: 0,
-    longitude: 0,
-    name: 'Middle of the sea',
-    description: 'Good for swimming',
-    icon: '🤿',
-  },
-];
-
 const App = () => {
+  const [checkInLocations, setCheckInLocations] = useState(null);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [viewport, setViewport] = useState({
     width: window.innerWidth,
     height: window.innerHeight - 150,
-    latitude: 37.7577,
-    longitude: -122.4376,
+    latitude: 51.4197877,
+    longitude: -0.0828316,
     zoom: 8,
   });
+
+  const fetchCheckInLocations = async () => {
+    try {
+      // TODO - Update URL depending on environment
+      const response = await fetch(`http://localhost:3001/api/v1/check_ins`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error_message || 'Unable to fetch check-ins');
+      }
+
+      setCheckInLocations(data.check_ins);
+    } catch (error) {
+      // TODO - Display this error somehow
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchCheckInLocations();
+  }, []);
 
   return (
     <div>
       <Map
-        checkInLocations={DUMMY_DATA}
+        checkInLocations={checkInLocations}
         selectedMarker={selectedMarker}
         setSelectedMarker={setSelectedMarker}
         viewport={viewport}
         setViewport={setViewport}
       />
       <Controls
-        checkInLocations={DUMMY_DATA}
+        checkInLocations={checkInLocations}
         selectedMarker={selectedMarker}
         setSelectedMarker={setSelectedMarker}
         viewport={viewport}
         setViewport={setViewport}
       />
       <CheckIns
-        checkInLocations={DUMMY_DATA}
+        checkInLocations={checkInLocations}
         selectedMarker={selectedMarker}
         setSelectedMarker={setSelectedMarker}
         viewport={viewport}

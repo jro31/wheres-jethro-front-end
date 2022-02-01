@@ -11,18 +11,19 @@ const CheckIns = props => {
 
   return (
     <div>
-      {props.checkInLocations.map(location => (
-        <div
-          key={location.id}
-          onClick={() => locationRowClickHandler(location)}
-          className={`${styles['location-row']} ${
-            props.selectedMarker && props.selectedMarker.id === location.id ? styles.selected : ''
-          }`}
-        >
-          <div>{location.name}</div>
-          <div>{location.description}</div>
-        </div>
-      ))}
+      {props.checkInLocations &&
+        props.checkInLocations.map(location => (
+          <div
+            key={location.id}
+            onClick={() => locationRowClickHandler(location)}
+            className={`${styles['location-row']} ${
+              props.selectedMarker && props.selectedMarker.id === location.id ? styles.selected : ''
+            }`}
+          >
+            <div>{location.name}</div>
+            <div>{location.description}</div>
+          </div>
+        ))}
     </div>
   );
 };
