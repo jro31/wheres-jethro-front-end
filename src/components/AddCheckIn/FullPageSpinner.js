@@ -1,6 +1,12 @@
+import styles from './FullPageSpinner.module.css';
+
 const FullPageSpinner = props => {
-  // Should be a spinner with text (passed through props) beneath it
-  return <div>FULL PAGE SPINNER - {props.text}</div>;
+  return (
+    <div className={styles['spinner-container']}>
+      <div className={styles.spinner}></div>
+      <div className={styles['spinner-text']}>{props.text}</div>
+    </div>
+  );
 };
 
 export default FullPageSpinner;
