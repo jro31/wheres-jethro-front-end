@@ -5,13 +5,12 @@ import FullPageSpinner from '../components/AddCheckIn/FullPageSpinner';
 import LoginForm from '../components/AddCheckIn/LoginForm';
 import RetryGetCurrentLocation from '../components/AddCheckIn/RetryGetCurrentLocation';
 import useGetCurrentLocation from '../hooks/use-get-current-location';
-import Button from '../components/ui/Button';
+import Navbar from '../components/AddCheckIn/Navbar';
 
 const AddCheckIn = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginStatusChecked, setLoginStatusChecked] = useState(false);
   const [currentLocation, setCurrentLocation] = useState({ success: null });
-  const [logoutError, setLogoutError] = useState('');
   const getCurrentLocation = useGetCurrentLocation();
 
   const checkLoginStatus = useCallback(async () => {
@@ -27,30 +26,6 @@ const AddCheckIn = () => {
     setLoginStatusChecked(true);
   }, []);
 
-  const logoutHandler = async () => {
-    try {
-      // TODO - Update URL depending on environment
-      const response = await fetch(`http://localhost:3001/api/v1/logout`, {
-        method: 'DELETE',
-        credentials: 'include',
-      });
-
-      if (!response.ok) {
-        throw new Error('Unable to logout');
-      }
-
-      const data = await response.json();
-
-      if (data.logged_out) {
-        setLoggedIn(false);
-      } else {
-        throw new Error('Unable to logout');
-      }
-    } catch (error) {
-      setLogoutError(error);
-    }
-  };
-
   useEffect(() => {
     checkLoginStatus();
   }, [checkLoginStatus]);
@@ -64,6 +39,7 @@ const AddCheckIn = () => {
 
   return (
     <Fragment>
+      {loggedIn && currentLocation.success !== null && <Navbar setLoggedIn={setLoggedIn} />}
       {loginStatusChecked && (
         <Fragment>
           {loggedIn && (
@@ -75,8 +51,6 @@ const AddCheckIn = () => {
               {currentLocation.success === null && (
                 <FullPageSpinner text='Getting current location' />
               )}
-              {/* TODO - Display logout error */}
-              <Button onClick={logoutHandler}>Logout</Button>
             </Fragment>
           )}
           {!loggedIn && <LoginForm setLoggedIn={setLoggedIn} />}
