@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import styles from './AddCheckInForm.module.css';
 
 const AddCheckInForm = props => {
@@ -6,6 +8,7 @@ const AddCheckInForm = props => {
   const [enteredDescription, setEnteredDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const nameChangeHandler = event => {
     setEnteredName(event.target.value);
@@ -42,14 +45,11 @@ const AddCheckInForm = props => {
       if (response.status !== 201) {
         throw new Error(data.error_message || 'Something went wrong');
       }
-
-      setEnteredName('');
-      setEnteredDescription('');
-      // TODO - Redirect to homepage
+      navigate('/');
     } catch (error) {
       setError(error.message);
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   const canSubmit = () => {
