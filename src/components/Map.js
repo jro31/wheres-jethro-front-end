@@ -9,9 +9,10 @@ const Map = props => {
     props.setSelectedMarker(location);
   };
   const centreMap = useCentreMap();
+
   useEffect(() => {
     centreMap(props.checkInLocations, props.setSelectedMarker, props.viewport, props.setViewport);
-  }, []);
+  }, [props.checkInLocations]);
 
   return (
     <Fragment>
@@ -21,17 +22,18 @@ const Map = props => {
         onViewportChange={nextViewport => props.setViewport(nextViewport)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >
-        {props.checkInLocations.map(location => (
-          <Marker
-            key={location.id}
-            latitude={location.latitude}
-            longitude={location.longitude}
-            onClick={() => markerClickHandler(location)}
-            className={styles.marker}
-          >
-            {location.icon}
-          </Marker>
-        ))}
+        {props.checkInLocations &&
+          props.checkInLocations.map(location => (
+            <Marker
+              key={location.id}
+              latitude={location.latitude}
+              longitude={location.longitude}
+              onClick={() => markerClickHandler(location)}
+              className={styles.marker}
+            >
+              {location.icon || '📍'}
+            </Marker>
+          ))}
 
         {props.selectedMarker && (
           <Popup
