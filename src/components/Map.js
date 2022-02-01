@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { useEffect } from 'react';
 import MapGL, { Marker, Popup } from 'react-map-gl';
 
 import useCentreMap from '../hooks/use-centre-map';
@@ -15,38 +15,37 @@ const Map = props => {
   }, [props.checkInLocations]);
 
   return (
-    <Fragment>
-      <MapGL
-        {...props.viewport}
-        mapStyle='mapbox://styles/mapbox/satellite-streets-v11'
-        onViewportChange={nextViewport => props.setViewport(nextViewport)}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-      >
-        {props.checkInLocations &&
-          props.checkInLocations.map(location => (
-            <Marker
-              key={location.id}
-              latitude={location.latitude}
-              longitude={location.longitude}
-              onClick={() => markerClickHandler(location)}
-              className={styles.marker}
-            >
-              {location.icon || '📍'}
-            </Marker>
-          ))}
-
-        {props.selectedMarker && (
-          <Popup
-            latitude={props.selectedMarker.latitude}
-            longitude={props.selectedMarker.longitude}
-            onClose={() => props.setSelectedMarker(null)}
+    <MapGL
+      {...props.viewport}
+      mapStyle='mapbox://styles/mapbox/satellite-streets-v11'
+      onViewportChange={nextViewport => props.setViewport(nextViewport)}
+      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+      className={styles.map}
+    >
+      {props.checkInLocations &&
+        props.checkInLocations.map(location => (
+          <Marker
+            key={location.id}
+            latitude={location.latitude}
+            longitude={location.longitude}
+            onClick={() => markerClickHandler(location)}
+            className={styles.marker}
           >
-            <h2>{props.selectedMarker.name}</h2>
-            <p>{props.selectedMarker.description}</p>
-          </Popup>
-        )}
-      </MapGL>
-    </Fragment>
+            {location.icon || '📍'}
+          </Marker>
+        ))}
+
+      {props.selectedMarker && (
+        <Popup
+          latitude={props.selectedMarker.latitude}
+          longitude={props.selectedMarker.longitude}
+          onClose={() => props.setSelectedMarker(null)}
+        >
+          <h2>{props.selectedMarker.name}</h2>
+          <p>{props.selectedMarker.description}</p>
+        </Popup>
+      )}
+    </MapGL>
   );
 };
 
