@@ -5,6 +5,8 @@ import Button from '../ui/Button';
 import Form from '../ui/Form';
 import InputContainer from '../ui/InputContainer';
 
+const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
 const AddCheckInForm = props => {
   const [enteredName, setEnteredName] = useState('');
   const [enteredDescription, setEnteredDescription] = useState('');
@@ -44,6 +46,7 @@ const AddCheckInForm = props => {
             latitude: props.currentLocation.latitude,
             longitude: props.currentLocation.longitude,
             accuracy: props.currentLocation.accuracy,
+            time_zone: timeZone,
           },
         }),
         credentials: 'include',
@@ -88,6 +91,10 @@ const AddCheckInForm = props => {
       <InputContainer>
         <label htmlFor='accuracy'>Accuracy</label>
         <input type='text' required id='accuracy' disabled value={props.currentLocation.accuracy} />
+      </InputContainer>
+      <InputContainer>
+        <label htmlFor='time-zone'>Time zone</label>
+        <input type='text' required id='time-zone' disabled value={timeZone} />
       </InputContainer>
       <InputContainer>
         <label htmlFor='name'>Name</label>
