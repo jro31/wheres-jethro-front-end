@@ -8,6 +8,7 @@
   background-color: white;
   transition: top 0.4s;
   z-index: 10;
+  border-radius: 8px 8px 0 0;
 }
 
 .hide-check-ins {
@@ -24,11 +25,16 @@
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #f5f5f5;
+  border-radius: 8px 8px 0 0;
 }
 
 .check-ins-container {
+  background-color: white;
+  position: absolute;
   height: calc(45vh - 50px);
-  overflow: scroll;
   width: 100%;
   background-color: inherit;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  display: flex;
 }

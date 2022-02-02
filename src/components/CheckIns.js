@@ -1,30 +1,20 @@
-import useFlyToLocation from '../hooks/use-fly-to-location';
-import styles from './CheckIns.module.css';
+import { Fragment } from 'react';
+import LocationCard from './LocationCard';
 
 const CheckIns = props => {
-  const flyToLocation = useFlyToLocation();
-
-  const locationRowClickHandler = location => {
-    props.setSelectedMarker(location);
-    flyToLocation(location, props.viewport, props.setViewport);
-  };
-
   return (
-    <div>
+    <Fragment>
       {props.checkInLocations &&
-        props.checkInLocations.map(location => (
-          <div
+        props.checkInLocations.map((location, index) => (
+          <LocationCard
             key={location.id}
-            onClick={() => locationRowClickHandler(location)}
-            className={`${styles['location-row']} ${
-              props.selectedMarker && props.selectedMarker.id === location.id ? styles.selected : ''
-            }`}
-          >
-            <div>{location.name}</div>
-            <div>{location.description}</div>
-          </div>
+            location={location}
+            index={index}
+            selected={props.selectedMarker && props.selectedMarker.id === location.id}
+            setSelectedMarker={props.setSelectedMarker}
+          />
         ))}
-    </div>
+    </Fragment>
   );
 };
 

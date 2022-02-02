@@ -1,0 +1,70 @@
+.location-card-container {
+  height: 100%;
+  box-sizing: border-box;
+  min-width: 350px;
+  max-width: 90vw;
+  border: 1px solid black;
+  padding: 0.5rem;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selected-location-card-container {
+}
+
+.card {
+  width: 95%;
+  height: 95%;
+  border-radius: 25px;
+  position: relative;
+  color: white;
+}
+
+.card:before {
+  position: absolute;
+  background-color: rgb(247, 160, 164);
+  width: 60%;
+  height: 100%;
+  content: '';
+  border-radius: 25px;
+}
+
+.card-pink {
+  background-color: rgba(247, 160, 164, 0.5);
+}
+
+.card-pink:before {
+  background-color: rgb(247, 160, 164);
+}
+
+.card-green {
+  background-color: rgba(90, 178, 125, 0.5);
+}
+
+.card-green:before {
+  background-color: rgb(90, 178, 125);
+}
+
+.card-purple {
+  background-color: rgba(113, 121, 184, 0.5);
+}
+
+.card-purple:before {
+  background-color: rgb(113, 121, 184);
+}
+
+.card-yellow {
+  background-color: rgba(252, 238, 121, 0.5);
+}
+
+.card-yellow:before {
+  background-color: rgb(252, 238, 121);
+}
+
+.content-container {
+  padding: 25px;
+  position: relative;
+  z-index: 1;
+}

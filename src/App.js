@@ -11,7 +11,7 @@ const App = () => {
   const [displayCheckIns, setDisplayCheckIns] = useState(false);
   const [viewport, setViewport] = useState({
     width: window.innerWidth,
-    height: window.innerHeight - 50,
+    height: window.innerHeight - 42,
     latitude: 51.4197877,
     longitude: -0.0828316,
     zoom: 8,
@@ -63,13 +63,13 @@ const App = () => {
           {!displayCheckIns && <div>UP ARROW</div>}
         </div>
         <div className={styles['check-ins-container']}>
-          <Controls
+          {/* <Controls
             checkInLocations={checkInLocations}
             selectedMarker={selectedMarker}
             setSelectedMarker={setSelectedMarker}
             viewport={viewport}
             setViewport={setViewport}
-          />
+          /> */}
           <CheckIns
             checkInLocations={checkInLocations}
             selectedMarker={selectedMarker}
