@@ -33,14 +33,20 @@ const LocationCard = props => {
       }`}
     >
       <div className={`${styles.card} ${cardColorClass()}`}>
-        <div className={styles['content-container']}>SOME CONTENT</div>
-      </div>
-      {/* <div className={styles.number}>{index + 1}.</div>
-            <div className={styles.details}>
-              <div className={styles.name}>{location.name}</div>
-              <div className={styles.description}>{location.description}</div>
+        <div className={styles['content-container']}>
+          <div className={styles['activity-container']}>
+            <div className={styles['icon-outer-container']}>
+              <div className={styles['icon-inner-container']}>
+                <div className={styles.icon}>{props.location.icon || '📍'}</div>
+              </div>
             </div>
-            <div className={styles.icon}>{location.icon}</div> */}
+            <div className={styles.name}>{props.location.name}</div>
+          </div>
+          <div className={styles['date-container']}>
+            <div className={styles.date}>{props.location.datetime}</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

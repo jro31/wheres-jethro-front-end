@@ -37,4 +37,5 @@
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   display: flex;
+  align-items: center;
 }
