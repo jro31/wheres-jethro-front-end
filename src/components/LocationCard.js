@@ -6,7 +6,7 @@ const LocationCard = props => {
   const flyToLocation = useFlyToLocation();
 
   const cardColorClass = () => {
-    switch (props.index % 4) {
+    switch (props.index % 5) {
       case 0:
         return styles['card-pink'];
       case 1:
@@ -14,9 +14,28 @@ const LocationCard = props => {
       case 2:
         return styles['card-purple'];
       case 3:
-        return styles['card-yellow'];
+        return styles['card-blue'];
+      case 4:
+        return styles['card-maroon'];
       default:
         return styles['card-pink'];
+    }
+  };
+
+  const dateColorClass = () => {
+    switch (props.index % 5) {
+      case 0:
+        return styles['date-pink'];
+      case 1:
+        return styles['date-green'];
+      case 2:
+        return styles['date-purple'];
+      case 3:
+        return styles['date-blue'];
+      case 4:
+        return styles['date-maroon'];
+      default:
+        return styles['date-pink'];
     }
   };
 
@@ -42,8 +61,13 @@ const LocationCard = props => {
             </div>
             <div className={styles.name}>{props.location.name}</div>
           </div>
-          <div className={styles['date-container']}>
-            <div className={styles.date}>{props.location.datetime}</div>
+          <div className={styles['date-outer-container']}>
+            <div className={styles['date-inner-container']}>
+              <div className={`${styles.date} ${dateColorClass()}`}>
+                {props.location.datetime_humanized.date}
+              </div>
+              <div className={styles.time}>{props.location.datetime_humanized.time}</div>
+            </div>
           </div>
         </div>
       </div>

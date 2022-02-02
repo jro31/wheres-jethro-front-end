@@ -3,7 +3,7 @@
 
 .outer-container {
   position: absolute;
-  height: 45vh;
+  height: 55vh;
   width: 100%;
   background-color: white;
   transition: top 0.4s;
@@ -11,12 +11,24 @@
   border-radius: 8px 8px 0 0;
 }
 
+@media (min-height: 800px) {
+  .outer-container {
+    height: 45vh;
+  }
+}
+
 .hide-check-ins {
   top: calc(100vh - 50px);
 }
 
 .display-check-ins {
-  top: 55vh;
+  top: 45vh;
+}
+
+@media (min-height: 800px) {
+  .display-check-ins {
+    top: 55vh;
+  }
 }
 
 .arrow-container {
@@ -24,18 +36,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #f5f5f5;
   border-radius: 8px 8px 0 0;
 }
 
 .check-ins-container {
   background-color: white;
   position: absolute;
-  height: calc(45vh - 50px);
+  height: calc(55vh - 50px);
   width: 100%;
   background-color: inherit;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   display: flex;
   align-items: center;
+}
+
+@media (min-height: 800px) {
+  .check-ins-container {
+    height: calc(45vh - 50px);
+  }
 }
