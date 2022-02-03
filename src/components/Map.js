@@ -128,7 +128,7 @@ const Map = props => {
                   </div>
                 </div>
               </div>
-              <div>{props.selectedMarker.description}</div>
+              <div className={styles['pop-up-description']}>{props.selectedMarker.description}</div>
             </div>
           </div>
         </Popup>
