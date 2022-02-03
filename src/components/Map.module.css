@@ -1,3 +1,117 @@
 .marker {
   font-size: 35px;
 }
+
+.pop-up-pink > div:first-child {
+  border-top-color: rgb(247, 160, 164) !important;
+}
+
+.pop-up-green > div:first-child {
+  border-top-color: rgb(90, 178, 125) !important;
+}
+
+.pop-up-purple > div:first-child {
+  border-top-color: rgb(113, 121, 184) !important;
+}
+
+.pop-up-blue > div:first-child {
+  border-top-color: rgb(45, 199, 255) !important;
+}
+
+.pop-up-maroon > div:first-child {
+  border-top-color: rgb(130, 2, 99) !important;
+}
+
+.pop-up-content-outer-container {
+  border-radius: 25px;
+}
+
+.pop-up-content-outer-container:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  content: '';
+  border-radius: 25px;
+}
+
+.outer-container-pink:before {
+  background-color: rgb(247, 160, 164);
+}
+
+.outer-container-green:before {
+  background-color: rgb(90, 178, 125);
+}
+
+.outer-container-purple:before {
+  background-color: rgb(113, 121, 184);
+}
+
+.outer-container-blue:before {
+  background-color: rgb(45, 199, 255);
+}
+
+.outer-container-maroon:before {
+  background-color: rgb(130, 2, 99);
+}
+
+.pop-up-content-inner-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pop-up-content-inner-container:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
+  border-radius: 25px;
+}
+
+.inner-container-pink:before {
+  background-color: rgba(247, 160, 164, 0.5);
+}
+
+.inner-container-green:before {
+  background-color: rgba(90, 178, 125, 0.5);
+}
+
+.inner-container-purple:before {
+  background-color: rgba(113, 121, 184, 0.5);
+}
+
+.inner-container-blue:before {
+  background-color: rgba(45, 199, 255, 0.5);
+}
+
+.inner-container-maroon:before {
+  background-color: rgba(130, 2, 99, 0.5);
+}
+
+.pop-up-heading-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.pop-up-heading {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.pop-up-datetime-container {
+}
+
+.pop-up-date {
+  letter-spacing: 0.025rem;
+}
+
+.pop-up-time {
+  color: #a9a9a9;
+  font-size: 0.7rem;
+}
