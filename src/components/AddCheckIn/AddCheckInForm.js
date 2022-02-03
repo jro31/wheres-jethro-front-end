@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Resizer from 'react-image-file-resizer';
 
 import Button from '../ui/Button';
 import Form from '../ui/Form';
@@ -32,16 +33,37 @@ const AddCheckInForm = props => {
     setChosenPhoto(event.target.files[0]);
   };
 
+  const resizePhoto = () => {
+    if (!chosenPhoto) return;
+
+    return new Promise(resolve => {
+      Resizer.imageFileResizer(
+        chosenPhoto,
+        600, // maxWidth of the new image
+        600, // maxHeight of the new image
+        'JPEG', // Format of the new image
+        100, // Quality of the new image
+        0, // Rotation
+        uri => {
+          resolve(uri);
+        },
+        'file' // Output type
+      );
+    });
+  };
+
   const addCheckInHandler = async event => {
     event.preventDefault();
     setIsSubmitting(true);
 
     try {
+      const resizedPhoto = await resizePhoto();
+
       const formData = new FormData();
       formData.append('check_in[name]', enteredName.trim());
       formData.append('check_in[description]', enteredDescription.trim());
       formData.append('check_in[icon]', enteredIcon.trim());
-      formData.append('check_in[photo]', chosenPhoto);
+      if (chosenPhoto) formData.append('check_in[photo]', resizedPhoto);
       formData.append('check_in[latitude]', props.currentLocation.latitude);
       formData.append('check_in[longitude]', props.currentLocation.longitude);
       formData.append('check_in[accuracy]', props.currentLocation.accuracy);
