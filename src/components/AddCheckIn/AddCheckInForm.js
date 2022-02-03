@@ -11,6 +11,7 @@ const AddCheckInForm = props => {
   const [enteredName, setEnteredName] = useState('');
   const [enteredDescription, setEnteredDescription] = useState('');
   const [enteredIcon, setEnteredIcon] = useState('');
+  const [chosenPhoto, setChosenPhoto] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -27,28 +28,29 @@ const AddCheckInForm = props => {
     setEnteredIcon(event.target.value);
   };
 
+  const photoChangeHandler = event => {
+    setChosenPhoto(event.target.files[0]);
+  };
+
   const addCheckInHandler = async event => {
     event.preventDefault();
     setIsSubmitting(true);
 
     try {
+      const formData = new FormData();
+      formData.append('check_in[name]', enteredName.trim());
+      formData.append('check_in[description]', enteredDescription.trim());
+      formData.append('check_in[icon]', enteredIcon.trim());
+      formData.append('check_in[photo]', chosenPhoto);
+      formData.append('check_in[latitude]', props.currentLocation.latitude);
+      formData.append('check_in[longitude]', props.currentLocation.longitude);
+      formData.append('check_in[accuracy]', props.currentLocation.accuracy);
+      formData.append('check_in[time_zone]', timeZone);
+
       // TODO - Update URL depending on environment
       const response = await fetch(`http://localhost:3001/api/v1/check_ins`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          check_in: {
-            name: enteredName.trim(),
-            description: enteredDescription.trim(),
-            icon: enteredIcon.trim(),
-            latitude: props.currentLocation.latitude,
-            longitude: props.currentLocation.longitude,
-            accuracy: props.currentLocation.accuracy,
-            time_zone: timeZone,
-          },
-        }),
+        body: formData,
         credentials: 'include',
       });
       const data = await response.json();
@@ -113,6 +115,7 @@ const AddCheckInForm = props => {
         <label htmlFor='icon'>Icon</label>
         <input type='text' id='icon' value={enteredIcon} onChange={iconChangeHandler} />
       </InputContainer>
+      <input type='file' id='photo' onChange={photoChangeHandler} accept='image/*' />
       {/* TODO - Handle isSubmitting being true */}
       <Button disabled={!canSubmit() || isSubmitting} form='check-in-form'>
         Submit
