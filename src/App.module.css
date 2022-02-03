@@ -39,6 +39,10 @@
   border-radius: 8px 8px 0 0;
 }
 
+.arrow {
+  height: 100%;
+}
+
 .check-ins-container {
   background-color: white;
   position: absolute;

@@ -59,8 +59,12 @@ const App = () => {
         }`}
       >
         <div onClick={arrowClickHandler} className={styles['arrow-container']}>
-          {displayCheckIns && <div>DOWN ARROW</div>}
-          {!displayCheckIns && <div>UP ARROW</div>}
+          {displayCheckIns && (
+            <img src='/icons/down-arrow.svg' alt='Hide' className={styles.arrow} />
+          )}
+          {!displayCheckIns && (
+            <img src='/icons/up-arrow.svg' alt='Show' className={styles.arrow} />
+          )}
         </div>
         <div className={styles['check-ins-container']}>
           {/* <Controls
