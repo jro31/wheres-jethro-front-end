@@ -80,6 +80,7 @@ const App = () => {
             setSelectedMarker={setSelectedMarker}
             viewport={viewport}
             setViewport={setViewport}
+            setDisplayCheckIns={setDisplayCheckIns}
           />
         </div>
       </div>

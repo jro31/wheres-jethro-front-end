@@ -40,6 +40,7 @@ const LocationCard = props => {
   };
 
   const locationCardClickHandler = location => {
+    props.setDisplayCheckIns(false);
     props.setSelectedMarker(location);
     flyToLocation(location, props.viewport, props.setViewport);
   };
