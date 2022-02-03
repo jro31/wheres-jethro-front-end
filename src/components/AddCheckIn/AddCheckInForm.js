@@ -115,7 +115,10 @@ const AddCheckInForm = props => {
         <label htmlFor='icon'>Icon</label>
         <input type='text' id='icon' value={enteredIcon} onChange={iconChangeHandler} />
       </InputContainer>
-      <input type='file' id='photo' onChange={photoChangeHandler} accept='image/*' />
+      <InputContainer>
+        <label htmlFor='photo'>Photo</label>
+        <input type='file' id='photo' onChange={photoChangeHandler} accept='image/*' />
+      </InputContainer>
       {/* TODO - Handle isSubmitting being true */}
       <Button disabled={!canSubmit() || isSubmitting} form='check-in-form'>
         Submit
