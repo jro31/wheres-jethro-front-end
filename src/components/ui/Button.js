@@ -6,7 +6,7 @@ const Button = props => {
       onClick={props.onClick || null}
       disabled={props.disabled || false}
       form={props.form || null}
-      className={styles.button}
+      className={`${styles.button} ${props.className || ''}`}
     >
       {props.children}
     </button>

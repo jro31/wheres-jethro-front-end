@@ -1,0 +1,200 @@
+.location-card-container {
+  height: 100%;
+  box-sizing: border-box;
+  min-width: 90vw;
+  max-width: 90vw;
+  padding: 0.5rem;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .location-card-container {
+    min-width: 400px;
+    max-width: 400px;
+  }
+}
+
+@media (min-height: 800px) {
+  .location-card-container {
+    height: 80%;
+  }
+}
+
+.selected-location-card-container {
+}
+
+.card {
+  width: 95%;
+  height: 95%;
+  border-radius: 25px;
+  position: relative;
+  color: white;
+}
+
+.card:before {
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  content: '';
+  border-radius: 25px;
+}
+
+.card-pink {
+  background-color: rgba(247, 160, 164, 0.5);
+}
+
+.card-pink:before {
+  background-color: rgb(247, 160, 164);
+}
+
+.card-green {
+  background-color: rgba(90, 178, 125, 0.5);
+}
+
+.card-green:before {
+  background-color: rgb(90, 178, 125);
+}
+
+.card-purple {
+  background-color: rgba(113, 121, 184, 0.5);
+}
+
+.card-purple:before {
+  background-color: rgb(113, 121, 184);
+}
+
+.card-blue {
+  background-color: rgba(45, 199, 255, 0.5);
+}
+
+.card-blue:before {
+  background-color: rgb(45, 199, 255);
+}
+
+.card-maroon {
+  background-color: rgba(130, 2, 99, 0.5);
+}
+
+.card-maroon:before {
+  background-color: rgb(130, 2, 99);
+}
+
+.content-container {
+  padding: 25px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.activity-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.icon-outer-container {
+  display: flex;
+}
+
+.icon-inner-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  height: 55px;
+  width: 55px;
+}
+
+.icon {
+  font-size: 30px;
+}
+
+.name {
+  font-weight: 300;
+  font-size: 1.25rem;
+}
+
+@media (min-height: 600px) {
+  .name {
+    font-size: 1.5rem;
+  }
+}
+
+.date-outer-container {
+  background-color: white;
+  position: relative;
+  border-radius: 25px;
+  height: 50px;
+  width: 100%;
+}
+
+.date-outer-container:before {
+  position: absolute;
+  width: 61.5%;
+  height: 100%;
+  content: '';
+  border-radius: 25px 0 0 25px;
+  background-color: rgba(245, 245, 245, 0.8);
+}
+
+.date-inner-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 25px;
+}
+
+.date {
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.025rem;
+}
+
+@media (min-height: 600px) {
+  .date {
+    font-size: 1.2rem;
+  }
+}
+
+.date-pink {
+  color: rgb(247, 160, 164);
+}
+
+.date-green {
+  color: rgb(90, 178, 125);
+}
+
+.date-purple {
+  color: rgb(113, 121, 184);
+}
+
+.date-blue {
+  color: rgb(45, 199, 255);
+}
+
+.date-maroon {
+  color: rgb(130, 2, 99);
+}
+
+.time {
+  color: #a9a9a9;
+  font-size: 0.7rem;
+}
+
+@media (min-height: 600px) {
+  .time {
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,69 @@
+.map-container {
+}
+
+.outer-container {
+  position: absolute;
+  height: 55vh;
+  width: 100%;
+  background-color: white;
+  transition: top 0.4s;
+  z-index: 10;
+  border-radius: 8px 8px 0 0;
+}
+
+@media (min-height: 800px) {
+  .outer-container {
+    height: 45vh;
+  }
+}
+
+.hide-check-ins {
+  top: calc(100vh - 50px);
+}
+
+.display-check-ins {
+  top: 45vh;
+}
+
+@media (min-height: 800px) {
+  .display-check-ins {
+    top: 55vh;
+  }
+}
+
+.arrow-container {
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.arrow {
+  height: 100%;
+}
+
+.error {
+  transform: translateY(-10px);
+  color: red;
+  font-weight: bold;
+}
+
+.check-ins-container {
+  background-color: white;
+  position: absolute;
+  height: calc(55vh - 50px);
+  width: 100%;
+  background-color: inherit;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-height: 800px) {
+  .check-ins-container {
+    height: calc(45vh - 50px);
+  }
+}

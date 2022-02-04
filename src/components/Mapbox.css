@@ -1,0 +1,8 @@
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+  transform: translateY(-7px);
+}
+
+.mapboxgl-popup-content {
+  border-radius: 25px !important;
+  padding: 15px 15px 20px !important;
+}
