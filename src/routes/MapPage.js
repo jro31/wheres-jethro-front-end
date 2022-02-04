@@ -10,6 +10,7 @@ const MapPage = props => {
   const [checkInLocations, setCheckInLocations] = useState(null);
   const [displayCheckIns, setDisplayCheckIns] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [error, setError] = useState('');
   const [viewport, setViewport] = useState({
     width: window.innerWidth,
     height: window.innerHeight - 42,
@@ -20,6 +21,8 @@ const MapPage = props => {
   const checkInsContainerRef = useRef();
 
   const fetchCheckInLocations = async (limit = null, offset = null, scrollLeft = 0) => {
+    setError('');
+
     const params = () => {
       if (!limit && !offset) return '';
 
@@ -42,8 +45,7 @@ const MapPage = props => {
       }
       checkInsContainerRef.current.scrollLeft = scrollLeft;
     } catch (error) {
-      // TODO - Display this error somehow
-      console.log(error.message);
+      setError(error.message);
     }
   };
 
@@ -78,6 +80,7 @@ const MapPage = props => {
           {!displayCheckIns && (
             <img src='/icons/up-arrow.svg' alt='Show' className={styles.arrow} />
           )}
+          <div className={styles.error}>{error}</div>
         </div>
         <div ref={checkInsContainerRef} className={styles['check-ins-container']}>
           <CheckIns

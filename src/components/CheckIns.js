@@ -18,9 +18,6 @@ const CheckIns = props => {
           />
         ))}
     </Fragment>
-    // TODO - The API should return the last (20?) check-ins by default and position the map accordingly
-    // After the last check-in, there should be a "Show archived check-ins" button, which loads all check-ins
-    // and centres the map accordingly
   );
 };
 

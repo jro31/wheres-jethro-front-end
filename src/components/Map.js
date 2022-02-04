@@ -3,7 +3,7 @@ import MapGL, { Marker, Popup } from 'react-map-gl';
 
 import useCentreMap from '../hooks/use-centre-map';
 import styles from './Map.module.css';
-import './PopUp.css';
+import './Mapbox.css';
 
 const Map = props => {
   const markerClickHandler = location => {
