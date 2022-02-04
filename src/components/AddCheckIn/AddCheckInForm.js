@@ -63,7 +63,7 @@ const AddCheckInForm = props => {
       formData.append('check_in[name]', enteredName.trim());
       formData.append('check_in[description]', enteredDescription.trim());
       formData.append('check_in[icon]', enteredIcon.trim());
-      if (chosenPhoto) formData.append('check_in[photo]', resizedPhoto);
+      if (resizedPhoto) formData.append('check_in[photo]', resizedPhoto);
       formData.append('check_in[latitude]', props.currentLocation.latitude);
       formData.append('check_in[longitude]', props.currentLocation.longitude);
       formData.append('check_in[accuracy]', props.currentLocation.accuracy);
