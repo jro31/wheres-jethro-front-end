@@ -13,10 +13,12 @@ const Map = props => {
 
   const selectedLocationIndex = selectedLocation => {
     let selectedLocationIndex = 0;
-    for (const [index, location] of props.checkInLocations.entries()) {
-      if (location.id === selectedLocation.id) {
-        selectedLocationIndex = index;
-        break;
+    if (props.checkInLocations) {
+      for (const [index, location] of props.checkInLocations.entries()) {
+        if (location.id === selectedLocation.id) {
+          selectedLocationIndex = index;
+          break;
+        }
       }
     }
     return selectedLocationIndex;
