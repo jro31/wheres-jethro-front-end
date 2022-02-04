@@ -95,6 +95,7 @@
 
 .pop-up-heading-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 10px;
   position: relative;
@@ -119,4 +120,14 @@
 
 .pop-up-description {
   position: relative;
+}
+
+.pop-up-photo {
+  position: relative;
+}
+
+.pop-up-photo img {
+  max-height: 40vh;
+  max-width: 80vw;
+  border-radius: 25px;
 }
