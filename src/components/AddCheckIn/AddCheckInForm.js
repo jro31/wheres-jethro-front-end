@@ -81,6 +81,7 @@ const AddCheckInForm = props => {
         throw new Error(data.error_message || 'Something went wrong');
       }
       navigate('/');
+      // TODO - Open the pop-up of the created check-in
     } catch (error) {
       setError(error.message);
       setIsSubmitting(false);

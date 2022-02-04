@@ -105,6 +105,7 @@ const Map = props => {
           onClose={() => props.setSelectedMarker(null)}
           offsetLeft={17}
           closeButton={false}
+          dynamicPosition={false}
           className={popUpColorClass(props.selectedMarker)}
         >
           <div
@@ -128,7 +129,16 @@ const Map = props => {
                   </div>
                 </div>
               </div>
-              <div className={styles['pop-up-description']}>{props.selectedMarker.description}</div>
+              {props.selectedMarker.description && (
+                <div className={styles['pop-up-description']}>
+                  {props.selectedMarker.description}
+                </div>
+              )}
+              {props.selectedMarker.photo_url && (
+                <div className={styles['pop-up-photo']}>
+                  <img src={props.selectedMarker.photo_url} alt={props.selectedMarker.name} />
+                </div>
+              )}
             </div>
           </div>
         </Popup>
