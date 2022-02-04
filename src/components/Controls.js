@@ -11,12 +11,18 @@ const Controls = props => {
     props.setDisplayCheckIns(false);
   };
 
+  const loadArchivedCheckInsHandler = () => {
+    props.fetchCheckInLocations(null, 10, props.checkInsContainerRef.current.scrollLeft);
+  };
+
   return (
     <div className={styles['controls-container']}>
       <Button onClick={resetMapHandler} className={styles.button}>
         Reset map
       </Button>
-      <Button className={styles.button}>Load archived check-ins</Button>
+      <Button onClick={loadArchivedCheckInsHandler} className={styles.button}>
+        Load archived check-ins
+      </Button>
     </div>
   );
 };

@@ -19,7 +19,7 @@ const MapPage = props => {
   });
   const checkInsContainerRef = useRef();
 
-  const fetchCheckInLocations = async (limit = null, offset = null, scrollLeft = true) => {
+  const fetchCheckInLocations = async (limit = null, offset = null, scrollLeft = 0) => {
     const params = () => {
       if (!limit && !offset) return '';
 
@@ -35,8 +35,12 @@ const MapPage = props => {
         throw new Error(data.error_message || 'Unable to fetch check-ins');
       }
 
-      setCheckInLocations(data.check_ins);
-      if (scrollLeft) checkInsContainerRef.current.scrollLeft = 0;
+      if (offset) {
+        setCheckInLocations(() => [...checkInLocations, ...data.check_ins]);
+      } else {
+        setCheckInLocations(data.check_ins);
+      }
+      checkInsContainerRef.current.scrollLeft = scrollLeft;
     } catch (error) {
       // TODO - Display this error somehow
       console.log(error.message);
@@ -48,7 +52,7 @@ const MapPage = props => {
   };
 
   useEffect(() => {
-    fetchCheckInLocations(20);
+    fetchCheckInLocations(10);
   }, []);
 
   return (
@@ -91,6 +95,8 @@ const MapPage = props => {
             viewport={viewport}
             setViewport={setViewport}
             setDisplayCheckIns={setDisplayCheckIns}
+            fetchCheckInLocations={fetchCheckInLocations}
+            checkInsContainerRef={checkInsContainerRef}
           />
         </div>
       </div>
