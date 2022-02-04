@@ -1,11 +1,14 @@
 import useCentreMap from '../hooks/use-centre-map';
 import Button from './ui/Button';
 
+import styles from './Controls.module.css';
+
 const Controls = props => {
   const centreMap = useCentreMap();
 
   return (
-    <div>
+    <div className={styles['controls-container']}>
+      {/* TODO - This should also close the menu */}
       <Button
         onClick={() =>
           centreMap(
@@ -15,9 +18,11 @@ const Controls = props => {
             props.setViewport
           )
         }
+        className={styles.button}
       >
-        Centre map
+        Reset map
       </Button>
+      <Button className={styles.button}>Load archived check-ins</Button>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+// TODO - Update favicon
+
 import { Routes, Route } from 'react-router-dom';
 
 import AddCheckIn from './routes/AddCheckIn';

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import CheckIns from '../components/CheckIns';
 import Controls from '../components/Controls';
@@ -17,11 +17,18 @@ const MapPage = props => {
     longitude: -0.0828316,
     zoom: 8,
   });
+  const checkInsContainerRef = useRef();
 
-  const fetchCheckInLocations = async () => {
+  const fetchCheckInLocations = async (limit = null, offset = null, scrollLeft = true) => {
+    const params = () => {
+      if (!limit && !offset) return '';
+
+      return `?${limit ? `limit=${limit}` : ''}${offset ? `offset=${offset}` : ''}`;
+    };
+
     try {
       // TODO - Update URL depending on environment
-      const response = await fetch(`http://localhost:3001/api/v1/check_ins`);
+      const response = await fetch(`http://localhost:3001/api/v1/check_ins${params()}`);
       const data = await response.json();
 
       if (!response.ok) {
@@ -29,6 +36,7 @@ const MapPage = props => {
       }
 
       setCheckInLocations(data.check_ins);
+      if (scrollLeft) checkInsContainerRef.current.scrollLeft = 0;
     } catch (error) {
       // TODO - Display this error somehow
       console.log(error.message);
@@ -40,7 +48,7 @@ const MapPage = props => {
   };
 
   useEffect(() => {
-    fetchCheckInLocations();
+    fetchCheckInLocations(20);
   }, []);
 
   return (
@@ -67,14 +75,7 @@ const MapPage = props => {
             <img src='/icons/up-arrow.svg' alt='Show' className={styles.arrow} />
           )}
         </div>
-        <div className={styles['check-ins-container']}>
-          {/* <Controls
-            checkInLocations={checkInLocations}
-            selectedMarker={selectedMarker}
-            setSelectedMarker={setSelectedMarker}
-            viewport={viewport}
-            setViewport={setViewport}
-          /> */}
+        <div ref={checkInsContainerRef} className={styles['check-ins-container']}>
           <CheckIns
             checkInLocations={checkInLocations}
             selectedMarker={selectedMarker}
@@ -82,6 +83,13 @@ const MapPage = props => {
             viewport={viewport}
             setViewport={setViewport}
             setDisplayCheckIns={setDisplayCheckIns}
+          />
+          <Controls
+            checkInLocations={checkInLocations}
+            selectedMarker={selectedMarker}
+            setSelectedMarker={setSelectedMarker}
+            viewport={viewport}
+            setViewport={setViewport}
           />
         </div>
       </div>
