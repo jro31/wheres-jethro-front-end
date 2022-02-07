@@ -1,4 +1,3 @@
-// TODO - Update favicon
 // TODO - Update readme
 
 import React, { Suspense } from 'react';
