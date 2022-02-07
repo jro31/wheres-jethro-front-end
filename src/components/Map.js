@@ -1,9 +1,14 @@
 import { useEffect } from 'react';
 import MapGL, { Marker, Popup } from 'react-map-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 import useCentreMap from '../hooks/use-centre-map';
 import styles from './Map.module.css';
 import './Mapbox.css';
+
+import mapboxgl from 'mapbox-gl';
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 const Map = props => {
   const markerClickHandler = location => {
