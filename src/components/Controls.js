@@ -2,6 +2,7 @@ import useCentreMap from '../hooks/use-centre-map';
 import Button from './ui/Button';
 
 import styles from './Controls.module.css';
+import { numberOfCheckInsToDisplayOnLoad } from '../routes/MapPage';
 
 const Controls = props => {
   const centreMap = useCentreMap();
@@ -12,17 +13,23 @@ const Controls = props => {
   };
 
   const loadArchivedCheckInsHandler = () => {
-    props.fetchCheckInLocations(null, 10, props.checkInsContainerRef.current.scrollLeft);
+    props.fetchCheckInLocations(
+      null,
+      numberOfCheckInsToDisplayOnLoad,
+      props.checkInsContainerRef.current.scrollLeft
+    );
   };
 
   return (
     <div className={styles['controls-container']}>
       <Button onClick={resetMapHandler} className={styles.button}>
-        Reset map
+        Centre map
       </Button>
-      <Button onClick={loadArchivedCheckInsHandler} className={styles.button}>
-        Load archived check-ins
-      </Button>
+      {props.checkInLocations && props.checkInLocations.length <= numberOfCheckInsToDisplayOnLoad && (
+        <Button onClick={loadArchivedCheckInsHandler} className={styles.button}>
+          Load archived check-ins
+        </Button>
+      )}
     </div>
   );
 };

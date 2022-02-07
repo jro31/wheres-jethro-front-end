@@ -44,6 +44,10 @@
   height: 100%;
 }
 
+.fetching-check-ins {
+  transform: translateY(-10px);
+}
+
 .error {
   transform: translateY(-10px);
   color: red;

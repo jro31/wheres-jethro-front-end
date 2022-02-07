@@ -6,10 +6,13 @@ import Map from '../components/Map';
 
 import styles from './MapPage.module.css';
 
-const MapPage = props => {
+export const numberOfCheckInsToDisplayOnLoad = 10;
+
+const MapPage = () => {
   const [checkInLocations, setCheckInLocations] = useState(null);
   const [displayCheckIns, setDisplayCheckIns] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [isFetchingCheckIns, setIsFetchingCheckIns] = useState(false);
   const [error, setError] = useState('');
   const [viewport, setViewport] = useState({
     width: window.innerWidth,
@@ -22,6 +25,7 @@ const MapPage = props => {
 
   const fetchCheckInLocations = async (limit = null, offset = null, scrollLeft = 0) => {
     setError('');
+    setIsFetchingCheckIns(true);
 
     const params = () => {
       if (!limit && !offset) return '';
@@ -34,12 +38,15 @@ const MapPage = props => {
       const response = await fetch(`http://localhost:3001/api/v1/check_ins${params()}`);
       const data = await response.json();
 
+      setIsFetchingCheckIns(false);
+
       if (!response.ok) {
         throw new Error(data.error_message || 'Unable to fetch check-ins');
       }
 
       if (offset) {
         setCheckInLocations(() => [...checkInLocations, ...data.check_ins]);
+        setDisplayCheckIns(false);
       } else {
         setCheckInLocations(data.check_ins);
       }
@@ -54,7 +61,7 @@ const MapPage = props => {
   };
 
   useEffect(() => {
-    fetchCheckInLocations(10);
+    fetchCheckInLocations(numberOfCheckInsToDisplayOnLoad);
   }, []);
 
   return (
@@ -80,7 +87,10 @@ const MapPage = props => {
           {!displayCheckIns && (
             <img src='/icons/up-arrow.svg' alt='Show' className={styles.arrow} />
           )}
-          <div className={styles.error}>{error}</div>
+          {isFetchingCheckIns && (
+            <div className={styles['fetching-check-ins']}>Fetching check-ins...</div>
+          )}
+          {error && <div className={styles.error}>{error}</div>}
         </div>
         <div ref={checkInsContainerRef} className={styles['check-ins-container']}>
           <CheckIns
