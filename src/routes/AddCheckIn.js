@@ -14,8 +14,7 @@ const AddCheckIn = () => {
   const getCurrentLocation = useGetCurrentLocation();
 
   const checkLoginStatus = useCallback(async () => {
-    // TODO - Update URL depending on environment
-    const response = await fetch(`http://localhost:3001/api/v1/logged_in`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/logged_in`, {
       credentials: 'include',
     });
     const data = await response.json();
