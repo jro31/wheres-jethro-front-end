@@ -29,10 +29,12 @@ const Navbar = props => {
 
   return (
     <div className={styles.navbar}>
-      <div onClick={logoutHandler} className={styles['logout-button']}>
-        Logout
+      <div className={styles['logout-container']}>
+        {logoutError && <div className={styles.error}>{logoutError}</div>}
+        <div onClick={logoutHandler} className={styles['logout-button']}>
+          Logout
+        </div>
       </div>
-      {/* TODO - Display logout error */}
     </div>
   );
 };

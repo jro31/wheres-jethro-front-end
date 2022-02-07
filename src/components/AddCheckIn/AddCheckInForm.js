@@ -5,6 +5,7 @@ import Resizer from 'react-image-file-resizer';
 import Button from '../ui/Button';
 import Form from '../ui/Form';
 import InputContainer from '../ui/InputContainer';
+import styles from './AddCheckInForm.module.css';
 
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -95,7 +96,6 @@ const AddCheckInForm = props => {
     );
   };
 
-  // TODO - Display error somewhere
   return (
     <Form onSubmit={addCheckInHandler} id='check-in-form'>
       <InputContainer>
@@ -142,6 +142,7 @@ const AddCheckInForm = props => {
         <input type='file' id='photo' onChange={photoChangeHandler} accept='image/*' />
       </InputContainer>
       {/* TODO - Handle isSubmitting being true */}
+      {error && <div className={styles.error}>{error}</div>}
       <Button disabled={!canSubmit() || isSubmitting} form='check-in-form'>
         Submit
       </Button>

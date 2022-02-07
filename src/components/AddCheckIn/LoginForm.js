@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../ui/Button';
 import Form from '../ui/Form';
 import InputContainer from '../ui/InputContainer';
+import styles from './LoginForm.module.css';
 
 const LoginForm = props => {
   const [enteredEmail, setEnteredEmail] = useState('');
@@ -69,7 +70,7 @@ const LoginForm = props => {
         />
       </InputContainer>
       {/* TODO - Handle is submitting being true */}
-      {/* TODO - Display error message */}
+      {error && <div className={styles.error}>{error}</div>}
       <Button disabled={!canSubmit() || isSubmitting} form='login-form'>
         Login
       </Button>
