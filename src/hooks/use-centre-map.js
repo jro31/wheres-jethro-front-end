@@ -10,6 +10,15 @@ const useCentreMap = () => {
       const line = linestring(coordinates);
       const [minLng, minLat, maxLng, maxLat] = bbox(line);
 
+      console.log('🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮');
+      console.log(viewport);
+      console.log(typeof viewport.latitude);
+      console.log(minLng);
+      console.log(typeof minLng);
+      console.log(minLat);
+      console.log(maxLng);
+      console.log(maxLat);
+
       const vp = new WebMercatorViewport(viewport);
 
       const { longitude, latitude, zoom } = vp.fitBounds(
@@ -18,7 +27,7 @@ const useCentreMap = () => {
           [maxLng, maxLat],
         ],
         {
-          padding: 40,
+          padding: 0,
         }
       );
 
