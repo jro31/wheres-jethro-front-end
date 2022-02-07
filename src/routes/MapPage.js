@@ -61,7 +61,7 @@ const MapPage = () => {
 
   useEffect(() => {
     fetchCheckInLocations(numberOfCheckInsToDisplayOnLoad);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>

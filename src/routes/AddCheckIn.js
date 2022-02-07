@@ -34,7 +34,7 @@ const AddCheckIn = () => {
       setCurrentLocation({ success: null });
       getCurrentLocation(setCurrentLocation);
     }
-  }, [loggedIn]);
+  }, [loggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Fragment>

@@ -77,7 +77,7 @@ const Map = props => {
 
   useEffect(() => {
     centreMap(props.checkInLocations, props.setSelectedMarker, props.viewport, props.setViewport);
-  }, [props.checkInLocations]);
+  }, [props.checkInLocations]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <MapGL
