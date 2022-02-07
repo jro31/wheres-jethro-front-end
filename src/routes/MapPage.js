@@ -34,8 +34,7 @@ const MapPage = () => {
     };
 
     try {
-      // TODO - Update URL depending on environment
-      const response = await fetch(`http://localhost:3001/api/v1/check_ins${params()}`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/check_ins${params()}`);
       const data = await response.json();
 
       setIsFetchingCheckIns(false);

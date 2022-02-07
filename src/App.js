@@ -1,4 +1,5 @@
 // TODO - Update favicon
+// TODO - Update readme
 
 import { Routes, Route } from 'react-router-dom';
 

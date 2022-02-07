@@ -69,8 +69,7 @@ const AddCheckInForm = props => {
       formData.append('check_in[accuracy]', props.currentLocation.accuracy);
       formData.append('check_in[time_zone]', timeZone);
 
-      // TODO - Update URL depending on environment
-      const response = await fetch(`http://localhost:3001/api/v1/check_ins`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/check_ins`, {
         method: 'POST',
         body: formData,
         credentials: 'include',

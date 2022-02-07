@@ -6,8 +6,7 @@ const Navbar = props => {
 
   const logoutHandler = async () => {
     try {
-      // TODO - Update URL depending on environment
-      const response = await fetch(`http://localhost:3001/api/v1/logout`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/logout`, {
         method: 'DELETE',
         credentials: 'include',
       });
