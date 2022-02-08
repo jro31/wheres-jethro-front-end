@@ -24,6 +24,13 @@
 
 .pop-up-content-outer-container {
   border-radius: 25px;
+  max-width: 85vw;
+}
+
+@media (min-width: 640px) {
+  .pop-up-content-outer-container {
+    max-width: 40vw;
+  }
 }
 
 .pop-up-content-outer-container:before {
@@ -124,10 +131,12 @@
 
 .pop-up-photo {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .pop-up-photo img {
   max-height: 40vh;
-  max-width: 80vw;
+  max-width: 85%;
   border-radius: 25px;
 }

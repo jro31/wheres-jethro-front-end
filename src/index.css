@@ -13,6 +13,7 @@ textarea {
   border: 1px solid #282828;
   background-color: #f8f8f8;
   box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+  font-family: inherit;
 }
 
 input:focus-visible,

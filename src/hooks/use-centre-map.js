@@ -18,7 +18,7 @@ const useCentreMap = () => {
           [maxLng, maxLat],
         ],
         {
-          padding: 40,
+          padding: 70,
         }
       );
 
