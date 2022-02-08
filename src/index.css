@@ -22,5 +22,5 @@ textarea:focus-visible {
 
 input:disabled {
   background-color: #d8d8d8;
-  color: #606060;
+  color: #282828;
 }

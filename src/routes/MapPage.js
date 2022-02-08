@@ -91,7 +91,12 @@ const MapPage = () => {
           )}
           {error && <div className={styles.error}>{error}</div>}
         </div>
-        <div ref={checkInsContainerRef} className={styles['check-ins-container']}>
+        <div
+          ref={checkInsContainerRef}
+          className={`${styles['check-ins-container']} ${
+            displayCheckIns ? styles['container-open'] : styles['container-closed']
+          }`}
+        >
           <CheckIns
             checkInLocations={checkInLocations}
             selectedMarker={selectedMarker}

@@ -34,7 +34,7 @@ const LoginForm = props => {
         },
         body: JSON.stringify({
           user: {
-            email: enteredEmail.trim(),
+            email: enteredEmail.trim().toLowerCase(),
             password: enteredPassword.trim(),
           },
         }),

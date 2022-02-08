@@ -60,18 +60,25 @@
 
 .check-ins-container {
   position: absolute;
-  /* height: calc(55vh - 50px); */
-  height: 0;
   width: 100%;
   background-color: inherit;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   display: flex;
   align-items: center;
+  transition: height 0.4s;
+}
+
+.container-closed {
+  height: 0;
+}
+
+.container-open {
+  height: calc(55vh - 50px);
 }
 
 @media (min-height: 800px) {
-  .check-ins-container {
+  .container-open {
     height: calc(45vh - 50px);
   }
 }

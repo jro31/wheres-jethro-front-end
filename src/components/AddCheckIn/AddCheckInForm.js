@@ -97,7 +97,6 @@ const AddCheckInForm = props => {
   };
 
   return (
-    // FIXME - The disabled inputs are hard to read on mobile
     <Form onSubmit={addCheckInHandler} id='check-in-form'>
       <InputContainer>
         <label htmlFor='latitude'>Latitude</label>
