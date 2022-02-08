@@ -1,16 +1,19 @@
 // TODO - Update readme
-
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import MapPage from './routes/MapPage';
-import AddCheckIn from './routes/AddCheckIn';
+
+const AddCheckIn = React.lazy(() => import('./routes/AddCheckIn'));
 
 const App = () => {
   return (
-    <Routes>
-      <Route path='/' element={<MapPage />} />
-      <Route path='check-in' element={<AddCheckIn />} />
-    </Routes>
+    <Suspense fallback={<p>Loading...</p>}>
+      <Routes>
+        <Route path='/' element={<MapPage />} />
+        <Route path='check-in' element={<AddCheckIn />} />
+      </Routes>
+    </Suspense>
   );
 };
 
