@@ -1,33 +1,37 @@
+.page-container {
+  position: relative;
+}
+
 .map-container {
 }
 
 .outer-container {
   position: absolute;
-  height: 55vh;
   width: 100%;
   background-color: white;
-  transition: top 0.4s;
+  transition: all 0.4s;
   z-index: 10;
   border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  bottom: 0;
 }
 
 @media (min-height: 800px) {
   .outer-container {
-    height: 45vh;
   }
 }
 
 .hide-check-ins {
-  top: calc(100vh - 50px);
+  height: 50px;
 }
 
 .display-check-ins {
-  top: 45vh;
+  height: 55vh;
 }
 
 @media (min-height: 800px) {
   .display-check-ins {
-    top: 55vh;
+    height: 45vh;
   }
 }
 
@@ -55,9 +59,9 @@
 }
 
 .check-ins-container {
-  background-color: white;
   position: absolute;
-  height: calc(55vh - 50px);
+  /* height: calc(55vh - 50px); */
+  height: 0;
   width: 100%;
   background-color: inherit;
   overflow-x: scroll;

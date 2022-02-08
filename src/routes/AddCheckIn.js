@@ -6,6 +6,7 @@ import LoginForm from '../components/AddCheckIn/LoginForm';
 import RetryGetCurrentLocation from '../components/AddCheckIn/RetryGetCurrentLocation';
 import useGetCurrentLocation from '../hooks/use-get-current-location';
 import Navbar from '../components/AddCheckIn/Navbar';
+import styles from './AddCheckIn.module.css';
 
 const AddCheckIn = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -37,7 +38,7 @@ const AddCheckIn = () => {
   }, [loggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Fragment>
+    <div className={styles['page-container']}>
       {loggedIn && currentLocation.success !== null && <Navbar setLoggedIn={setLoggedIn} />}
       {loginStatusChecked && (
         <Fragment>
@@ -56,7 +57,7 @@ const AddCheckIn = () => {
         </Fragment>
       )}
       {!loginStatusChecked && <FullPageSpinner text='Checking login status' />}
-    </Fragment>
+    </div>
   );
 };
 
