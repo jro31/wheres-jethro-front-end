@@ -64,7 +64,7 @@ const MapPage = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div>
+    <div className={styles['page-container']} style={{ height: window.innerHeight }}>
       <div className={styles['map-container']}>
         <Map
           checkInLocations={checkInLocations}
